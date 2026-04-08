@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анасын сағынған бала - Топтық жұмыс</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: #0f0f1a;
+            --card-bg: #16213e;
+            --accent-1: #ff2e63;
+            --accent-2: #08d9d6;
+            --text-light: #eaeaea;
+            --highlight: #f9d71c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center; /* Вертикальды ортаға қою */
+            justify-content: center; /* Горизонтальды ортаға қою */
+            padding: 20px;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        .super-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            color: var(--accent-1);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: white;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-2);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .intro-section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(8, 217, 214, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-section h2 {
+            font-size: 1.2rem;
+            color: var(--highlight);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .intro-section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .group-card {
+            background: rgba(22, 33, 62, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .group-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-2);
+            box-shadow: 0 15px 35px rgba(8, 217, 214, 0.2);
+        }
+
+        .group-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .icon-box {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .group-role-num {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .group-title {
+            font-size: 1.3rem;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .group-body {
+            padding: 25px;
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-list li {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .task-list li b {
+            color: var(--highlight);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        /* Түстер */
+        .group-1 .icon-box { background: rgba(255, 46, 99, 0.15); border: 1px solid var(--accent-1); }
+        .group-1 .group-role-num { color: var(--accent-1); }
+        
+        .group-2 .icon-box { background: rgba(8, 217, 214, 0.15); border: 1px solid var(--accent-2); }
+        .group-2 .group-role-num { color: var(--accent-2); }
+        
+        .group-3 .icon-box { background: rgba(249, 215, 28, 0.15); border: 1px solid var(--highlight); }
+        .group-3 .group-role-num { color: var(--highlight); }
+
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            background: var(--accent-1); color: white;
+            border: none; padding: 12px 20px;
+            font-weight: bold; border-radius: 12px;
+            cursor: pointer; z-index: 100;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { opacity: 0.8; transform: scale(1.05); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .groups-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-btn" onclick="history.back()">⬅ АРТҚА</button>
+
+    <div class="main-wrapper">
+        <header>
+            <div class="super-title">ТОПТЫҚ ЖҰМЫС</div>
+            <h1>Анасын сағынған бала</h1>
+        </header>
+
+        <div class="intro-section">
+            <h2>Дәйексөз</h2>
+            <p>"Анасын сағынған бала еңбекпен шыңдалып, топтық жұмыста ынтымақ пен бірліктің қадірін терең ұғынады"</p>
+        </div>
+
+        <div class="groups-grid">
+            <div class="group-card group-1">
+                <div class="group-header">
+                    <div class="icon-box">🧠</div>
+                    <div>
+                        <div class="group-role-num">1-ТОП</div>
+                        <h3 class="group-title">ПСИХОЛОГТАР</h3>
+                    </div>
+                </div>
+                <div class="group-body">
+                    <ul class="task-list">
+                        <li><b>Ішкі күйді талдау:</b> Аянның сағынышын, үмітін және мұңын тереңнен қарастырыңыз.</li>
+                        <li><b>Салыстыра суреттеу:</b> Кейіпкердің сезімдерін мәтін үзінділерімен дәлелдей отырып талдаңыз.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="group-card group-2">
+                <div class="group-header">
+                    <div class="icon-box">🎨</div>
+                    <div>
+                        <div class="group-role-num">2-ТОП</div>
+                        <h3 class="group-title">ЗЕРТТЕУШІЛЕР</h3>
+                    </div>
+                </div>
+                <div class="group-body">
+                    <ul class="task-list">
+                        <li><b>Контрастты табу:</b> Шығармадағы қарама-қарсы суреттеулерді (жарқын және мұңлы сәттер) анықтаңыз.</li>
+                        <li><b>Визуалды дәлел:</b> Баланың бақытты шағы мен қазіргі күйін мәтін негізінде салыстырыңыз.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="group-card group-3">
+                <div class="group-header">
+                    <div class="icon-box">📖</div>
+                    <div>
+                        <div class="group-role-num">3-ТОП</div>
+                        <h3 class="group-title">ӘДЕБИЕТШІЛЕР</h3>
+                    </div>
+                </div>
+                <div class="group-body">
+                    <ul class="task-list">
+                        <li><b>Көркем тіл:</b> Автордың көркемдегіш құралдарды (теңеу, эпитет) қолдану шеберлігін талдаңыз.</li>
+                        <li><b>Аянға сипаттама:</b> Мәтіндегі деректерді қолданып, кейіпкерге толық мінездеме беріңіз.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

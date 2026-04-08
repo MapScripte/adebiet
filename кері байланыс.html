@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Әдебиет Сабағы: Кері Байланыс</title>
+    <style>
+        /* Негізгі стильдер - Көзді ауыртпайтын ашық фон */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #fdfaf5; /* Жұмсақ крем түсі */
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNlMmQ5YzgiIGZpbGwtb3BhY2l0eT0iMC4zIj48cGF0aCBkPSJNMCAwaDQwdjQwSDBWMHptMjAgMjBoMjB2MjBIMjBWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4='); /* Жеңіл текстура */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Декоративті элемент - Қауырсын қалам (background) */
+        body::before {
+            content: '✒️';
+            position: absolute;
+            font-size: 300px;
+            color: rgba(226, 217, 200, 0.2);
+            bottom: -50px;
+            right: -50px;
+            transform: rotate(-20deg);
+            z-index: 0;
+        }
+
+        .main-wrapper {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            text-align: center;
+            width: 90%;
+            max-width: 1000px;
+            z-index: 1;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        h1 {
+            color: #4a3b2b; /* Қанық қоңыр */
+            margin-bottom: 10px;
+            font-size: 2.8rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        p.subtitle {
+            font-style: italic;
+            color: #8c7b6a;
+            margin-bottom: 50px;
+            font-size: 1.2rem;
+        }
+
+        /* Карталар контейнері - Бос орынды толтыру */
+        .cards-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: nowrap; /* Планшетте сыю үшін */
+        }
+
+        /* Ортақ карта стилі */
+        .card {
+            background: #ffffff;
+            border-radius: 25px;
+            padding: 40px 30px;
+            flex: 1; /* Барлық орынды тең бөлісу */
+            min-width: 250px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border: 2px solid transparent;
+        }
+
+        /* Карталардың ерекше түстері (Назар аударатын пастель) */
+        /* 1. Бәрін түсіндім - Жұмсақ жасыл/көгілдір */
+        .card-green {
+            background-color: #f0fff4;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        .card-green:hover {
+            box-shadow: 0 15px 30px rgba(40, 167, 69, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            border-color: #28a745;
+        }
+
+        /* 2. Түсіндім бірақ... - Жұмсақ сары/қызғылт сары */
+        .card-yellow {
+            background-color: #fffdf0;
+            border-color: #ffeeba;
+            color: #856404;
+        }
+        .card-yellow:hover {
+            box-shadow: 0 15px 30px rgba(255, 193, 7, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ffc107;
+        }
+
+        /* 3. Қиын болды - Жұмсақ қызыл */
+        .card-red {
+            background-color: #fff5f5;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .card-red:hover {
+            box-shadow: 0 15px 30px rgba(220, 53, 69, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            border-color: #dc3545;
+        }
+
+        /* Элементтер стилі */
+        .emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .text {
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            flex-grow: 1; /* Мәтін ортада тұруы үшін */
+            display: flex;
+            align-items: center;
+        }
+
+        .counter-wrapper {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .counter-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .counter {
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        /* Қалқымалы хабарлама (Toast) */
+        #feedback-toast {
+            visibility: hidden;
+            min-width: 350px;
+            color: #fff;
+            text-align: center;
+            border-radius: 20px;
+            padding: 25px;
+            position: fixed;
+            z-index: 10;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s, visibility 0.5s;
+        }
+
+        #feedback-toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 60px;
+        }
+
+        #toast-emoji {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        /* Мобильді телефондарға бейімдеу */
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .card {
+                width: 100%;
+                min-width: auto;
+                padding: 30px;
+            }
+            h1 { font-size: 2rem; }
+            .emoji { font-size: 60px; }
+        }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            background-color: #856404; color: rgb(249, 248, 248);
+            border: none; padding: 10px 18px;
+            font-size: 14px; border-radius: 10px;
+            cursor: pointer; z-index: 150;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="history.back()">⬅ Артқа қайту</button>
+
+<div class="main-wrapper">
+    <h1>📚 Әдебиет әлемі</h1>
+    <p class="subtitle">Бүгінгі сабақтың "дәмі" қандай болды? Парақты таңдаңыз.</p>
+
+    <div class="cards-container">
+        <div class="card card-green" onclick="handleVote(1)">
+            <span class="emoji">📖</span>
+            <div class="text">Бәрін түсіндім, сабақ қызықты болды</div>
+            <div class="counter-wrapper">
+                <span class="counter-label">Оқушылар саны</span>
+                <div class="counter" id="count1">0</div>
+            </div>
+        </div>
+
+        <div class="card card-yellow" onclick="handleVote(2)">
+            <span class="emoji">📝</span>
+            <div class="text">Түсіндім, бірақ сұрақтарым бар</div>
+            <div class="counter-wrapper">
+                <span class="counter-label">Оқушылар саны</span>
+                <div class="counter" id="count2">0</div>
+            </div>
+        </div>
+
+        <div class="card card-red" onclick="handleVote(3)">
+            <span class="emoji">🧐</span>
+            <div class="text">Маған қиын болды, көмек қажет</div>
+            <div class="counter-wrapper">
+                <span class="counter-label">Оқушылар саны</span>
+                <div class="counter" id="count3">0</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="feedback-toast">
+    <span id="toast-emoji"></span>
+    <span id="toast-text"></span>
+</div>
+
+<script>
+    // Санауыштарды сақтау
+    let votes = {
+        1: 0,
+        2: 0,
+        3: 0
+    };
+
+    // Хабарламалар мен смайликтер мәліметтер базасы
+    const feedbackData = {
+        1: { 
+            emoji: '🌟', 
+            text: 'Керемет! Сен нағыз кітапқұмарсың!', 
+            color: '#28a745' // Жасыл
+        },
+        2: { 
+            emoji: '💡', 
+            text: 'Жақсы! Сұрақ қою - білімнің кілті.', 
+            color: '#fd7e14' // Қызғылт сары
+        },
+        3: { 
+            emoji: '🤝', 
+            text: 'Ештеңе етпейді, келесі жолы бірге талқылаймыз!', 
+            color: '#dc3545' // Қызыл
+        }
+    };
+
+    function handleVote(id) {
+        // 1. Санды көбейту
+        votes[id]++;
+        document.getElementById('count' + id).innerText = votes[id];
+
+        // 2. Хабарламаны дайындау
+        const toast = document.getElementById('feedback-toast');
+        const toastEmoji = document.getElementById('toast-emoji');
+        const toastText = document.getElementById('toast-text');
+        
+        const data = feedbackData[id];
+        
+        toastEmoji.innerText = data.emoji;
+        toastText.innerText = data.text;
+        toast.style.backgroundColor = data.color;
+
+        // 3. Хабарламаны көрсету
+        toast.classList.add('show');
+
+        // 4. 3 секундтан кейін жасыру
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+</script>
+
+</body>
+</html>

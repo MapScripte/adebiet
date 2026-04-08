@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Талдау шеберханасы: Анасын сағынған бала</title>
+    <style>
+        :root {
+            --primary: #5d4037; /* Қоңыр - ескі хат түсі */
+            --blue: #2980b9;    /* Көк - мөлдір сағыныш */
+            --orange: #d35400;  /* Сарғыш - үміт оты */
+            --green: #27ae60;   /* Жасыл - өміршеңдік */
+            --bg: #f4ece1;
+        }
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: var(--bg);
+            background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            border: 2px solid var(--primary);
+        }
+        h1 { text-align: center; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; }
+        .input-section { text-align: center; margin-bottom: 30px; background: #fffdfa; padding: 20px; border-radius: 8px; }
+        textarea {
+            width: 90%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid #d2b48c;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .btn-group button {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-divide { background: var(--primary); color: white; }
+        .btn-clear { background: #95a5a6; color: white; }
+        
+        .groups-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .group-card {
+            background: white;
+            border-top: 5px solid var(--primary);
+            border-radius: 0 0 10px 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .group-card h3 { margin-top: 0; text-align: center; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        
+        /* Топ түстері мен рөлдері */
+        .group-1 { border-top-color: var(--blue); }
+        .group-1 h3 { color: var(--blue); }
+        .group-2 { border-top-color: var(--orange); }
+        .group-2 h3 { color: var(--orange); }
+        .group-3 { border-top-color: var(--green); }
+        .group-3 h3 { color: var(--green); }
+
+        .task-box {
+            font-size: 0.9rem;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 3px solid #ccc;
+        }
+        .student-list { list-style: none; padding: 0; }
+        .student-list li { padding: 8px; border-bottom: 1px solid #f0f0f0; font-weight: bold; color: #555; }
+        
+        .method-footer {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+        }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            background-color: #fcfdfd; color: rgb(5, 5, 5);
+            border: none; padding: 10px 18px;
+            font-size: 14px; border-radius: 10px;
+            cursor: pointer; z-index: 150;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="history.back()">⬅ Артқа қайту</button>
+
+<div class="container">
+    <h1>📝 Сабақ: Кейіпкер сезімін талдау</h1>
+    
+    <div class="input-section">
+        <h3>Оқушылар тізімін енгізу</h3>
+        <textarea id="studentNames" placeholder="Әр жолға бір есім жазыңыз..."></textarea>
+        <div class="btn-group">
+            <button class="btn-divide" onclick="divideGroups()">🔍 Топтарға бөлу және тапсырма беру</button>
+            <button class="btn-clear" onclick="clearData()">🗑️ Тазалау</button>
+        </div>
+    </div>
+
+    <div class="groups-container">
+        <div class="group-card group-1">
+            <h3>🎭 «Психологтар»</h3>
+            <div class="task-box">
+                <strong>Мақсаты:</strong> Аянның ішкі күйін талдау.<br>
+                <strong>Тапсырма:</strong> Сағыныш пен төзімді салыстырыңыз. Мәтіннен дәлел табыңыз.
+            </div>
+            <ul class="student-list" id="list0"></ul>
+        </div>
+
+        <div class="group-card group-2">
+            <h3>🎨 «Суретші-зерттеушілер»</h3>
+            <div class="task-box">
+                <strong>Мақсаты:</strong> Қарама-қарсы суреттеуді табу.<br>
+                <strong>Тапсырма:</strong> Соғыс суықтығы мен бала ертегісінің жылуын контраст ретінде талдаңыз.
+            </div>
+            <ul class="student-list" id="list1"></ul>
+        </div>
+
+        <div class="group-card group-3">
+            <h3>✍️ «Әдебиетшілер»</h3>
+            <div class="task-box">
+                <strong>Мақсаты:</strong> Көркем тілмен жеткізу.<br>
+                <strong>Тапсырма:</strong> Шығармадағы теңеулер мен эпитеттерді қолданып, Аянға сипаттама беріңіз.
+            </div>
+            <ul class="student-list" id="list2"></ul>
+        </div>
+    </div>
+
+    <div class="method-footer">
+        <strong>Педагогикалық тәсіл: "Сараланған топтық жұмыс"</strong><br>
+        Оқушылар тек есімдері бойынша емес, шығарманы талдаудың үш түрлі бағыты (сезім, суреттеу, тіл) бойынша бөлінеді. Бұл оқу мақсатына толық қол жеткізуге мүмкіндік береді.
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        const savedNames = localStorage.getItem('students_lit');
+        if (savedNames) document.getElementById('studentNames').value = savedNames;
+        
+        const savedGroups = localStorage.getItem('groups_lit');
+        if (savedGroups) displayGroups(JSON.parse(savedGroups));
+    }
+
+    function divideGroups() {
+        const text = document.getElementById('studentNames').value;
+        if (!text.trim()) return alert("Есімдерді енгізіңіз!");
+        
+        localStorage.setItem('students_lit', text);
+        
+        let names = text.split('\n').map(n => n.trim()).filter(n => n !== "");
+        names.sort(() => Math.random() - 0.5);
+
+        const groups = [[], [], []];
+        names.forEach((name, index) => groups[index % 3].push(name));
+
+        localStorage.setItem('groups_lit', JSON.stringify(groups));
+        displayGroups(groups);
+    }
+
+    function displayGroups(groups) {
+        groups.forEach((group, i) => {
+            const list = document.getElementById('list' + i);
+            list.innerHTML = group.map(name => `<li>${name}</li>`).join('');
+        });
+    }
+
+    function clearData() {
+        if (confirm("Тізімді тазалайсыз ба?")) {
+            localStorage.removeItem('students_lit');
+            localStorage.removeItem('groups_lit');
+            location.reload();
+        }
+    }
+</script>
+
+</body>
+</html>

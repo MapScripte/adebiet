@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Әдебиет сабағы | Бекіту</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f2f5;
+            color: #1a1a1a;
+            overflow: hidden;
+        }
+
+        .main-card {
+            width: 95%;
+            max-width: 1100px;
+            height: 92vh;
+            background: #ffffff;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid #dcdde1;
+        }
+
+        header {
+            border-bottom: 3px solid #00d2d3;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #2f3640;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Дәйексөз блогы */
+        .quote-section {
+            background: #f8f9fa;
+            border-left: 6px solid #ff9f43;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .quote-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2f3542;
+            font-style: italic;
+        }
+
+        .quote-section b {
+            color: #2f3640;
+            background: rgba(255, 159, 67, 0.1);
+            padding: 0 4px;
+        }
+
+        /* Сұрақтар мен Жауаптар */
+        .content-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .q-container {
+            margin-bottom: 12px;
+            border: 2px solid #f1f2f6;
+            border-radius: 10px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .q-container:hover {
+            border-color: #00d2d3;
+            box-shadow: 0 0 15px rgba(0, 210, 211, 0.15);
+        }
+
+        .q-trigger {
+            width: 100%;
+            padding: 18px 25px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2f3640;
+            line-height: 1.4;
+        }
+
+        .q-number {
+            color: #00d2d3;
+            font-weight: 800;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px rgba(0, 210, 211, 0.2);
+        }
+
+        .ans-panel {
+            display: none;
+            padding: 15px 25px 25px 65px;
+            background: #f9f9f9;
+            border-top: 1px solid #f1f2f6;
+            font-size: 1rem;
+            color: #57606f;
+            line-height: 1.6;
+        }
+
+        .neon-badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            background: #00d2d3;
+            color: white;
+            border-radius: 50px;
+            box-shadow: 0 0 8px rgba(0, 210, 211, 0.5);
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #a4b0be;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Scrollbar */
+        .content-area::-webkit-scrollbar { width: 8px; }
+        .content-area::-webkit-scrollbar-thumb { background: #ced6e0; border-radius: 10px; }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            background-color: #00d2d3; color: rgb(5, 5, 5);
+            border: none; padding: 10px 18px;
+            font-size: 14px; border-radius: 10px;
+            cursor: pointer; z-index: 150;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="history.back()">⬅ Артқа қайту</button>
+
+    <div class="main-card">
+        <header>
+            <h1>Бекіту сұрақтары бөлімі</h1>
+        </header>
+
+        <div class="quote-section">
+            <p>"Адал <b>Еңбек</b> — жүректегі мазасыз <b>Сағынышты</b> асқақ мұратқа айналдырады. Бүгінгі <b>Бекіту</b> — осы құндылықтардың өзара байланысын түйіндейтін білім негізі."</p>
+        </div>
+
+        <div class="content-area">
+            <div class="q-container">
+                <button class="q-trigger" onclick="toggle(1)">
+                    <div><span class="q-number">1.</span> Бала анасын күн сияқты жылы деп елестетеді, анасы алыста болса да, оның жүрегіне жақын.Мәтіннен қандай салыстыра суреттеу және қарама-қарсы суреттеу мысалдарын таба аласың?</div>
+                    <span class="neon-badge">ЖАУАПТЫ КӨРУ</span>
+                </button>
+                <div id="a1" class="ans-panel">
+                    <b>Салыстыру:</b> «Анасын күн сияқты жылы деп елестетеді» (ананы күнге теңеу). <br>
+                    <b>Қарама-қарсылық:</b> «Анасы алыста болса да — оның жүрегіне жақын» (алыс пен жақын ұғымдарының беттесуі).
+                </div>
+            </div>
+
+            <div class="q-container">
+                <button class="q-trigger" onclick="toggle(2)">
+                    <div><span class="q-number">2.</span> Салыстыра суреттеу баланың сағыныш сезімін қалай түсінуге көмектеседі? Өз сөзіңмен түсіндір.</div>
+                    <span class="neon-badge">ЖАУАПТЫ КӨРУ</span>
+                </button>
+                <div id="a2" class="ans-panel">
+                    Салыстыру арқылы сағыныш сезімінің нәзіктігі мен тереңдігі ашылады. Күннің жылуы секілді, сағыныш та баланың жанын жылытып, оған күш беретін қасиетті сезім екенін түсіндіреді.
+                </div>
+            </div>
+
+            <div class="q-container">
+                <button class="q-trigger" onclick="toggle(3)">
+                    <div><span class="q-number">3.</span> «Сағыныш» тақырыбында өзің бір салыстыру немесе қарама-қарсы сөйлем құрастырып көр.</div>
+                    <span class="neon-badge">ЖАУАПТЫ КӨРУ</span>
+                </button>
+                <div id="a3" class="ans-panel">
+                    <i>Мысалы:</i> "Сағыныш — таудың мөлдір бұлағындай таза, бірақ шөлдегі сағымдай қол жетпес қиян."
+                </div>
+            </div>
+
+            <div class="q-container">
+                <button class="q-trigger" onclick="toggle(4)">
+                    <div><span class="q-number">4.</span> Мәтіндегі салыстыра суреттеу мен қарама-қарсы суреттеудің айырмашылығы неде?</div>
+                    <span class="neon-badge">ЖАУАПТЫ КӨРУ</span>
+                </button>
+                <div id="a4" class="ans-panel">
+                    <b>Салыстыра суреттеу</b> — екі нәрсенің ұқсастық белгілерін табу арқылы бейнені толықтырады. <br>
+                    <b>Қарама-қарсы суреттеу (антитеза)</b> — екі түрлі қарама-қайшы ұғымды қатар қою арқылы мағыналық ерекшелікті немесе ішкі шиеленісті көрсетеді.
+                </div>
+            </div>
+
+            <div class="q-container" style="border-color: #00d2d3;">
+                <button class="q-trigger" onclick="toggle(5)">
+                    <div><span class="q-number">5.</span> Сағыныш сезімін жеткізуде қайсысы әсерлі деп ойлайсың: салыстыру ма, әлде қарама-қарсылық па? Неге?</div>
+                    <span class="neon-badge">ЖАУАПТЫ КӨРУ</span>
+                </button>
+                <div id="a5" class="ans-panel">
+                    Бұл жеке қабылдауға байланысты. Бірақ көбіне <b>қарама-қарсылық</b> әсерлірек көрінеді, өйткені ол «алыс-жақын», «суық-ыстық» сияқты контрасттар арқылы сезімнің шынайы драмасын айқынырақ жеткізеді.
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            ӘДЕБИЕТ ТЕМАТИКАСЫ • 2026 • ОРАЛ
+        </footer>
+    </div>
+
+    <script>
+        function toggle(id) {
+            const el = document.getElementById('a' + id);
+            const isVisible = el.style.display === 'block';
+            
+            // Басқаларын жабу
+            document.querySelectorAll('.ans-panel').forEach(p => p.style.display = 'none');
+            
+            if (!isVisible) {
+                el.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жеке тапсырма: Анасын сағынған бала</title>
+    <style>
+        /* Басты стильдер: заманауи шрифттер және түс палитрасы */
+        :root {
+            --primary-color: #e74c3c; /* Жылы қызыл түс */
+            --accent-color: #d35400; /* Сағынышқа арналған қызғылт сары */
+            --bg-color: #fcf6f5; /* Өте ашық, жылы фон */
+            --text-color: #34495e;
+            --container-bg: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Контейнер стилі */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--container-bg);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s forwards;
+        }
+
+        /* Тақырып стилі */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Блоктардың жалпы стилі */
+        .content-block {
+            margin-bottom: 35px;
+            padding: 25px;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .content-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.4em;
+        }
+
+        /* Тапсырма шарты блогы */
+        .task-box {
+            border-left: 6px solid var(--primary-color);
+            background: #fff9f9;
+        }
+
+        .task-box ul {
+            padding-left: 20px;
+        }
+
+        .task-box li {
+            margin-bottom: 10px;
+        }
+
+        /* Кесте стилі */
+        .descriptor-table-container {
+            overflow-x: auto; /* Мобильді құрылғылар үшін */
+        }
+
+        .descriptor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            min-width: 500px;
+        }
+
+        .descriptor-table th, .descriptor-table td {
+            border-bottom: 1px solid #eee;
+            padding: 18px 15px;
+            text-align: left;
+        }
+
+        .descriptor-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .descriptor-table tr:hover {
+            background-color: #fff9f9;
+        }
+
+        /* Үлгі жауап блогы */
+        .sample-letter {
+            border: 2px dashed #e0c5b5;
+            background: #fffdfc;
+            position: relative;
+        }
+
+        .sample-letter::before {
+            content: '✉'; /* Хат белгішесі */
+            font-size: 3em;
+            color: rgba(211, 84, 0, 0.1);
+            position: absolute;
+            top: 20px;
+            right: 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* Ерекшеленген мәтіндер */
+        .sample-letter strong {
+            color: #2c3e50;
+        }
+
+        .sample-letter em {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .sample-letter p {
+            margin: 10px 0;
+        }
+
+        /* Подвал */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #95a5a6;
+        }
+
+        /* Анимация */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Мобильді бейімделу (Responsive) */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            .container {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .descriptor-table th, .descriptor-table td {
+                padding: 12px 10px;
+                font-size: 0.9em;
+            }
+        }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            background-color: #e74c3c; color: rgb(247, 241, 241);
+            border: none; padding: 10px 18px;
+            font-size: 14px; border-radius: 10px;
+            cursor: pointer; z-index: 150;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <button class="back-btn" onclick="history.back()">⬅ Артқа қайту</button>
+
+<div class="container">
+    <h1>📌 Жеке тапсырма: Ана</h1>
+
+    <div class="content-block task-box">
+        <h3>📍 Тапсырма шарты:</h3>
+        <p>«Анасын сағынған бала» тақырыбында анаңа <strong>5–6 сөйлемнен</strong> тұратын хат жаз. Хатыңда міндетті түрде болсын:</p>
+        <ul>
+            <li>✨ Салыстыра суреттеу</li>
+            <li>🌓 Қарама-қарсы суреттеу</li>
+        </ul>
+    </div>
+
+    <div class="content-block">
+        <h3>🧾 Бағалау дескрипторлары (10 балл)</h3>
+        <div class="descriptor-table-container">
+            <table class="descriptor-table">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Дескриптор: Оқушы...</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>тақырыпты түсінеді</td></tr>
+                    <tr><td>2</td><td>сағыныш сезімін жеткізе алады</td></tr>
+                    <tr><td>3</td><td>мәтін құрылымын сақтайды (басы–негізгі–соңы)</td></tr>
+                    <tr><td>4</td><td>кемінде 5 сөйлем жазады</td></tr>
+                    <tr><td>5</td><td>салыстыра суреттеуді дұрыс қолданады</td></tr>
+                    <tr><td>6</td><td>қарама-қарсы суреттеуді қолданады</td></tr>
+                    <tr><td>7</td><td>салыстырудың мағынасы түсінікті</td></tr>
+                    <tr><td>8</td><td>қарама-қарсылық орынды берілген</td></tr>
+                    <tr><td>9</td><td>ойын жүйелі, түсінікті жеткізеді</td></tr>
+                    <tr><td>10</td><td>сауатты жазады (қате аз)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="content-block sample-letter">
+        <span class="badge">📩 Үлгі хат</span>
+        <p><strong>Қымбатты анашым!</strong></p>
+        <p>Сенің мейіріміңді сағынғаным сонша, сенің жылы жүзің <em>көктемнің шуақты күніндей</em> жаныма жылу береді. Сен қасымда болғанда айналам <strong>жап-жарық әлемге</strong> айналса, сенсіз өткен әрбір күнім <strong>қап-қара түнектей</strong> көңілсіз сезіледі. Сағыныштан жүрегім сыздап, сенің құшағыңды аңсап жүрмін. Біздің үйіміз сен барда берекелі болса, сен жоқта қаңырап бос қалғандай көрінеді екен. Тез арада қасыңа барып, маңдайыңнан иіскеуді армандаймын.</p>
+        <p><em>Ізгі ниетпен, сенің балаң.</em></p>
+    </div>
+
+    <footer>
+        © 2026 Онлайн Оқу Платформасы. Барлық құқықтар қорғалған.
+    </footer>
+</div>
+
+</body>
+</html>
