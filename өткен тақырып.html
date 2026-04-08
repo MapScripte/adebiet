@@ -16,17 +16,18 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            zoom: 1.1; 
         }
 
         #game-container {
             background: rgba(255, 255, 255, 0.95);
-            border: 4px solid #4fc3f7;
-            border-radius: 30px;
-            padding: 40px;
-            width: 85%;
-            max-width: 600px;
+            border: 6px solid #4fc3f7;
+            border-radius: 40px;
+            padding: 50px;
+            width: 90%;
+            max-width: 800px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
             position: relative;
         }
 
@@ -34,77 +35,118 @@
             color: #0277bd;
             font-family: 'Montserrat', sans-serif;
             margin-top: 0;
+            font-size: 2.5rem;
         }
 
         .quote-box {
             font-style: italic;
             color: #546e7a;
-            margin: 20px 0;
-            padding: 15px;
-            border-left: 5px solid #4fc3f7;
+            margin: 30px 0;
+            padding: 25px;
+            border-left: 8px solid #4fc3f7;
             background: #f1f8ff;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
+            line-height: 1.6;
         }
 
         #question-box {
-            font-size: 1.3rem;
-            min-height: 120px;
-            margin: 25px 0;
+            font-size: 1.8rem;
+            min-height: 180px;
+            margin: 30px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #fffde7;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            line-height: 1.4;
         }
 
         .btn-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
+            margin-top: 20px;
         }
 
         button {
-            padding: 15px 30px;
-            font-size: 1.1rem;
+            padding: 20px 40px;
+            font-size: 1.4rem;
             font-weight: bold;
             border: none;
-            border-radius: 15px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.2s;
             color: white;
         }
 
-        .start-btn { background: #0288d1; box-shadow: 0 5px 0 #01579b; width: 100%; }
-        .true-btn { background: #4caf50; box-shadow: 0 5px 0 #2e7d32; }
-        .false-btn { background: #ff5252; box-shadow: 0 5px 0 #c62828; }
+        .start-btn { 
+            background: #0288d1; 
+            box-shadow: 0 8px 0 #01579b; 
+            width: 100%; 
+            font-size: 1.6rem;
+        }
+        
+        .true-btn { background: #4caf50; box-shadow: 0 8px 0 #2e7d32; }
+        .false-btn { background: #ff5252; box-shadow: 0 8px 0 #c62828; }
 
-        button:active { transform: translateY(4px); box-shadow: none; }
+        button:active { transform: translateY(6px); box-shadow: none; }
+
+        #progress {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #546e7a;
+        }
 
         #feedback {
-            margin-top: 20px;
-            font-size: 1.2rem;
+            margin-top: 30px;
+            font-size: 2rem;
             font-weight: bold;
-            height: 30px;
+            height: 45px;
+        }
+
+        #score-board { 
+            margin-top: 25px; 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            color: #0277bd; 
+        }
+
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            background-color: #00d2ff; color: white;
+            border: none; padding: 15px 25px;
+            font-size: 1.1rem; border-radius: 15px;
+            cursor: pointer; z-index: 150;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .hidden { display: none; }
-        .correct { color: #2e7d32; }
-        .wrong { color: #c62828; }
-        
-        #score-board { margin-top: 15px; font-weight: bold; color: #0277bd; }
-        .back-btn {
-            position: fixed; top: 20px; left: 20px;
-            background-color: #00d2ff; color: rgb(249, 248, 248);
-            border: none; padding: 10px 18px;
-            font-size: 14px; border-radius: 10px;
-            cursor: pointer; z-index: 150;
+        .correct { color: #2e7d32; animation: pop 0.3s; }
+        .wrong { color: #c62828; animation: shake 0.3s; }
+
+        /* Жауап бергендегі эффектілер */
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
         }
     </style>
 </head>
 <body>
-    <button class="back-btn" onclick="history.back()">⬅ Артқа қайту</button>
+
+<button class="back-btn" onclick="history.back()">⬅ Артқа қайту</button>
+
+<audio id="sound-correct" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+<audio id="sound-wrong" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
 
 <div id="game-container">
     <div id="start-screen">
@@ -112,7 +154,7 @@
         <div class="quote-box">
             «Анасын сағынған бала еңбектеніп, өткенін қайталау арқылы өзін дамытады»
         </div>
-        <p>Өткен тақырып бойынша біліміңді тексеруге дайынсың ба?</p>
+        <p style="font-size: 1.3rem;">Өткен тақырып бойынша біліміңді тексеруге дайынсың ба?</p>
         <button class="start-btn" onclick="startGame()">Ойынды бастау 🚀</button>
     </div>
 
@@ -134,9 +176,6 @@
     </div>
 </div>
 
-<audio id="sound-correct" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
-<audio id="sound-wrong" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
-
 <script>
     const questions = [
         { text: "«Анасын сағынған бала» шығармасының негізгі идеясы — баланың анасына деген сағынышы мен мейірімін көрсету.", answer: true },
@@ -148,6 +187,10 @@
 
     let currentIdx = 0;
     let score = 0;
+
+    // Дыбыстарды алдын ала жүктеу
+    const correctSound = document.getElementById('sound-correct');
+    const wrongSound = document.getElementById('sound-wrong');
 
     function startGame() {
         document.getElementById('start-screen').classList.add('hidden');
@@ -173,19 +216,26 @@
             score++;
             feedback.textContent = "Дұрыс! 👍";
             feedback.className = "correct";
-            document.getElementById('sound-correct').play();
+            
+            // Позитивті дыбысты қосу
+            correctSound.currentTime = 0; // Дыбысты басынан бастау
+            correctSound.play();
         } else {
             feedback.textContent = "Қате! 😮";
             feedback.className = "wrong";
-            document.getElementById('sound-wrong').play();
+            
+            // Қате дыбысын қосу
+            wrongSound.currentTime = 0;
+            wrongSound.play();
         }
 
         document.getElementById('score').textContent = score;
 
+        // Келесі сұраққа өту
         setTimeout(() => {
             currentIdx++;
             loadQuestion();
-        }, 1200);
+        }, 1300);
     }
 
     function showResults() {
