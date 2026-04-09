@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="kk">
 <head>
@@ -5,10 +6,10 @@
     <title>Талдау шеберханасы: Анасын сағынған бала</title>
     <style>
         :root {
-            --primary: #5d4037; /* Қоңыр - ескі хат түсі */
-            --blue: #2980b9;    /* Көк - мөлдір сағыныш */
-            --orange: #d35400;  /* Сарғыш - үміт оты */
-            --green: #27ae60;   /* Жасыл - өміршеңдік */
+            --primary: #5d4037;
+            --blue: #2980b9;
+            --orange: #d35400;
+            --green: #27ae60;
             --bg: #f4ece1;
         }
         body {
@@ -50,6 +51,7 @@
         }
         .btn-divide { background: var(--primary); color: white; }
         .btn-clear { background: #95a5a6; color: white; }
+        .btn-file { background: #2c3e50; color: white; } /* Файлмен жұмыс түсі */
         
         .groups-container {
             display: grid;
@@ -65,7 +67,6 @@
         }
         .group-card h3 { margin-top: 0; text-align: center; padding-bottom: 10px; border-bottom: 1px solid #eee; }
         
-        /* Топ түстері мен рөлдері */
         .group-1 { border-top-color: var(--blue); }
         .group-1 h3 { color: var(--blue); }
         .group-2 { border-top-color: var(--orange); }
@@ -73,24 +74,9 @@
         .group-3 { border-top-color: var(--green); }
         .group-3 h3 { color: var(--green); }
 
-        .task-box {
-            font-size: 0.9rem;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 3px solid #ccc;
-        }
         .student-list { list-style: none; padding: 0; }
         .student-list li { padding: 8px; border-bottom: 1px solid #f0f0f0; font-weight: bold; color: #555; }
         
-        .method-footer {
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 8px;
-        }
         .back-btn {
             position: fixed; top: 20px; left: 20px;
             background-color: #fcfdfd; color: rgb(5, 5, 5);
@@ -98,6 +84,9 @@
             font-size: 14px; border-radius: 10px;
             cursor: pointer; z-index: 150;
         }
+        
+        /* Жасырын файл таңдау инпуты */
+        #fileInput { display: none; }
     </style>
 </head>
 <body>
@@ -109,8 +98,12 @@
     <div class="input-section">
         <h3>Оқушылар тізімін енгізу</h3>
         <textarea id="studentNames" placeholder="Әр жолға бір есім жазыңыз..."></textarea>
+        
         <div class="btn-group">
-            <button class="btn-divide" onclick="divideGroups()">🔍 Топтарға бөлу және тапсырма беру</button>
+            <button class="btn-divide" onclick="divideGroups()">🔍 Топтарға бөлу</button>
+            <button class="btn-file" onclick="exportData()">💾 Файлды сақтау (басқа компьютер үшін)</button>
+            <button class="btn-file" onclick="document.getElementById('fileInput').click()">📂 Файлды ашу</button>
+            <input type="file" id="fileInput" accept=".json" onchange="importData(event)">
             <button class="btn-clear" onclick="clearData()">🗑️ Тазалау</button>
         </div>
     </div>
@@ -118,26 +111,18 @@
     <div class="groups-container">
         <div class="group-card group-1">
             <h3>🎭 «Психологтар»</h3>
-            
             <ul class="student-list" id="list0"></ul>
         </div>
 
         <div class="group-card group-2">
             <h3>🎨 «Суретші-зерттеушілер»</h3>
-            
             <ul class="student-list" id="list1"></ul>
         </div>
 
         <div class="group-card group-3">
             <h3>✍️ «Әдебиетшілер»</h3>
-            
             <ul class="student-list" id="list2"></ul>
         </div>
-    </div>
-
-    <div class="method-footer">
-        <strong>Педагогикалық тәсіл: "Сараланған топтық жұмыс"</strong><br>
-        Оқушылар тек есімдері бойынша емес, шығарманы талдаудың үш түрлі бағыты (сезім, суреттеу, тіл) бойынша бөлінеді. 
     </div>
 </div>
 
@@ -171,6 +156,36 @@
             const list = document.getElementById('list' + i);
             list.innerHTML = group.map(name => `<li>${name}</li>`).join('');
         });
+    }
+
+    // Деректерді файлға көшіру
+    function exportData() {
+        const data = {
+            names: document.getElementById('studentNames').value,
+            groups: localStorage.getItem('groups_lit')
+        };
+        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'classroom_data.json';
+        a.click();
+    }
+
+    // Басқа компьютерде файлды ашу
+    function importData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const data = JSON.parse(e.target.result);
+            document.getElementById('studentNames').value = data.names;
+            localStorage.setItem('students_lit', data.names);
+            localStorage.setItem('groups_lit', data.groups);
+            displayGroups(JSON.parse(data.groups));
+            alert("Деректер сәтті жүктелді!");
+        };
+        reader.readAsText(file);
     }
 
     function clearData() {
